@@ -1,13 +1,30 @@
 import React from 'react';
-import weapons from './weapons.component';
+
+const weapons = [
+    {
+        id: 0,
+        name: "rock",
+        emojiDec: '✊'
+    },
+    {
+        id: 1,
+        name: "paper",
+        emojiDec: '✋'
+    },
+    {
+        id: 2,
+        name: "scissor",
+        emojiDec:'✌'
+    }
+];
 
 export class computer extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            // computerScore : 0,
-            computerSelected : null, 
+            computerSelected : [], 
         }
+        this.computerSelection = this.computerSelection.bind(this);
     }
 
     computerSelection = () => {
@@ -27,7 +44,7 @@ export class computer extends React.Component{
     render(){
         return(
             <div>
-                <p>The weapon Computer selected: {this.props.emojiDec}</p>
+                <p>The weapon Computer selected: {this.state.computerSelected.emojiDec}</p>
             </div>
         ) 
     }
