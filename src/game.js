@@ -188,7 +188,7 @@ export class rivals extends React.Component{
                 </div>
                 );
     }
-    // To reach the game point for odd number of rounds 
+    // To reach the game point for even number of rounds 
     else if(this.state.totalRounds%2 === 0){
         if(this.state.playerScore > this.state.totalRounds/2){
             return (
