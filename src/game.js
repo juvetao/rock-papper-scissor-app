@@ -230,21 +230,6 @@ export class rivals extends React.Component{
             );
         }
     } 
-    // else if (this.state.playerScore >= Math.ceil(this.state.totalRounds/2)){
-    //     return (
-    //         <div>
-    //             <h1>Player Win The Game! &#128522 </h1>
-    //             <button onClick = {this.restart}>Restart</button>
-    //         </div>
-    //         );
-    // } else if(this.state.computerScore >= Math.ceil(this.state.totalRounds/2)){
-    //     return (
-    //         <div>
-    //             <h1>Computer Win The Game! &#128531 </h1>
-    //             <button onClick = {this.restart}>Restart</button>
-    //         </div>
-    //         );
-    //     } 
     }
 
 
