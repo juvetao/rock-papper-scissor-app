@@ -1,4 +1,5 @@
 import React from 'react';
+import './game.css';
 
 //An array stored weapons + en extra empty element (in order to initialize index in constructor state as 0)
 const weapons = [
@@ -115,34 +116,36 @@ export class rivals extends React.Component{
         )
     }
 
-
-    render(props){
+    render(){
         if(this.state.counter === 0){
         return(
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <h1>Game: Rock, Paper and Scissor</h1>
+                <form class="set_form"onSubmit={this.handleSubmit}>
                     <label>
                         Enter the total round:
                     <input type="text" name = "totalInput" value={this.state.value} defaultValue="5"/>
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
-
-            <button onClick = {this.handleClick} id = "rock" >
-                Rock
-            </button>
-            <button onClick = {this.handleClick} id = "paper" >
-                Paper
-            </button>
-            <button onClick = {this.handleClick} id = "scissor">
-                Scissor
-            </button>
-                <p>Round: {this.state.counter} out of {this.state.totalRounds}</p>
-                <p>The weapon Player selected:{weapons[this.state.index].emojiDec}</p> 
-                <p>The weapon Computer selected: {this.state.computerSelected.emojiDec}</p>
-                <p>Result of this round: {this.state.roundResult}</p>
-                <p>Player : Computer</p>
-                <p>{this.state.playerScore} : {this.state.computerScore}</p>
+            <div class="weapons">
+                <button class="btn_weapon" onClick = {this.handleClick} id = "rock" >
+                    Rock
+                </button>
+                <button class="btn_weapon" onClick = {this.handleClick} id = "paper" >
+                    Paper
+                </button>
+                <button class="btn_weapon" onClick = {this.handleClick} id = "scissor">
+                    Scissor
+                </button>
+            </div>
+                <div class="result">
+                    <p><b>Round:</b> {this.state.counter} out of {this.state.totalRounds}</p>
+                    <p><b>The weapon Player selected:</b> {weapons[this.state.index].emojiDec}</p> 
+                    <p><b>The weapon Computer selected:</b> {this.state.computerSelected.emojiDec}</p>
+                    <p><b>Result of this round:</b> {this.state.roundResult}</p>
+                    <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
+                </div>
             </div>
         )
         
@@ -151,40 +154,38 @@ export class rivals extends React.Component{
         if(this.state.totalRounds%2 === 1){
             if(this.state.playerScore >= Math.ceil(this.state.totalRounds/2)){
                 return (
-                    <div>
+                    <div class="result">
                         <h1>Player Win The Game! <span role="img" aria-label="smiling-eyes">😊</span></h1>
-                        <p>Player : Computer</p>
-                        <p>{this.state.playerScore} : {this.state.computerScore}</p>
-                        <button onClick = {this.restart}>Restart</button>
+                        <p><b>Player : Computer </b>{this.state.playerScore} : {this.state.computerScore}</p>
+                        <button class="btn_restart" onClick = {this.restart}>Restart</button>
                     </div>
                 );
             } else if(this.state.computerScore >= Math.ceil(this.state.totalRounds/2)){
                 return (
-                    <div>
+                    <div class="result">
                         <h1>Computer Win The Game! <span role="img" aria-label="cold-sweat">😓 </span></h1>
-                        <p>Player : Computer</p>
-                        <p>{this.state.playerScore} : {this.state.computerScore}</p>
-                        <button onClick = {this.restart}>Restart</button>
+                        <p><b>Player : Computer </b>{this.state.playerScore} : {this.state.computerScore}</p>
+                        <button class="btn_restart" onClick = {this.restart}>Restart</button>
                     </div>
                     );
             }else return(
                 <div>
-        
-                <button onClick = {this.handleClick} id = "rock" >
-                    Rock
-                </button>
-                <button onClick = {this.handleClick} id = "paper" >
-                    Paper
-                </button>
-                <button onClick = {this.handleClick} id = "scissor">
-                    Scissor
-                </button>
-                    <p>Round: {this.state.counter} out of {this.state.totalRounds}</p>
-                    <p>The weapon Player selected:{weapons[this.state.index].emojiDec}</p> 
-                    <p>The weapon Computer selected: {this.state.computerSelected.emojiDec}</p>
-                    <p>Result of this round: {this.state.roundResult}</p>
-                    <p>Player : Computer</p>
-                    <p>{this.state.playerScore} : {this.state.computerScore}</p>
+                    <button class="btn_weapon" onClick = {this.handleClick} id = "rock" >
+                        Rock
+                    </button>
+                    <button class="btn_weapon" onClick = {this.handleClick} id = "paper" >
+                        Paper
+                    </button>
+                    <button class="btn_weapon" onClick = {this.handleClick} id = "scissor">
+                        Scissor
+                    </button>
+                    <div class="result">
+                        <p><b>Round:</b> {this.state.counter} out of {this.state.totalRounds}</p>
+                        <p><b>The weapon Player selected:</b> {weapons[this.state.index].emojiDec}</p> 
+                        <p><b>The weapon Computer selected:</b> {this.state.computerSelected.emojiDec}</p>
+                        <p><b>Result of this round:</b> {this.state.roundResult}</p>
+                        <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
+                    </div>
                 </div>
                 );
     }
@@ -192,40 +193,38 @@ export class rivals extends React.Component{
     else if(this.state.totalRounds%2 === 0){
         if(this.state.playerScore > this.state.totalRounds/2){
             return (
-                <div>
+                <div class="result">
                     <h1>Player Win The Game! <span role="img" aria-label="smiling-eyes">😊</span></h1>
-                    <p>Player : Computer</p>
-                    <p>{this.state.playerScore} : {this.state.computerScore}</p>
-                    <button onClick = {this.restart}>Restart</button>
+                    <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
+                    <button class="btn_restart" onClick = {this.restart}>Restart</button>
                 </div>
                 );
         }else if(this.state.computerScore > this.state.totalRounds/2){
             return (
-                <div>
+                <div class="result">
                     <h1>Computer Win The Game! <span role="img" aria-label="cold-sweat">😓 </span></h1>
-                    <p>Player : Computer</p>
-                    <p>{this.state.playerScore} : {this.state.computerScore}</p>
-                    <button onClick = {this.restart}>Restart</button>
+                    <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
+                    <button class="btn_restart" onClick = {this.restart}>Restart</button>
                 </div>
                 );
         }else return(
             <div>
-    
-            <button onClick = {this.handleClick} id = "rock" >
+            <button class="btn_weapon" onClick = {this.handleClick} id = "rock" >
                 Rock
             </button>
-            <button onClick = {this.handleClick} id = "paper" >
+            <button class="btn_weapon" onClick = {this.handleClick} id = "paper" >
                 Paper
             </button>
-            <button onClick = {this.handleClick} id = "scissor">
+            <button class="btn_weapon" onClick = {this.handleClick} id = "scissor">
                 Scissor
             </button>
-                <p>Round: {this.state.counter} out of {this.state.totalRounds}</p>
-                <p>The weapon Player selected:{weapons[this.state.index].emojiDec}</p> 
-                <p>The weapon Computer selected: {this.state.computerSelected.emojiDec}</p>
-                <p>Result of this round: {this.state.roundResult}</p>
-                <p>Player : Computer</p>
-                <p>{this.state.playerScore} : {this.state.computerScore}</p>
+                <div class="result">
+                    <p><b>Round:</b> {this.state.counter} out of {this.state.totalRounds}</p>
+                    <p><b>The weapon Player selected:</b> {weapons[this.state.index].emojiDec}</p> 
+                    <p><b>The weapon Computer selected:</b> {this.state.computerSelected.emojiDec}</p>
+                    <p><b>Result of this round:</b> {this.state.roundResult}</p>
+                    <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
+                </div>
             </div>
             );
         }
