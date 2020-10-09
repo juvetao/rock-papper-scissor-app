@@ -1,5 +1,6 @@
 // import React from "react"
 
+//An array stored weapons + en extra empty element (in order to initialize index in constructor state as 0)
 export const Weapons = [
     {},
     {

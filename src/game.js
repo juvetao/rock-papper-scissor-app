@@ -7,26 +7,6 @@ import ComputerWin from './ComputerWin'
 import Dashboard from './Dashboard';
 import Weapons from './Weapons'
 
-//An array stored weapons + en extra empty element (in order to initialize index in constructor state as 0)
-// export const weapons = [
-//     {},
-//     {
-//         id: 0,
-//         name: "rock",
-//         emojiDec: '✊'
-//     },
-//     {
-//         id: 1,
-//         name: "paper",
-//         emojiDec: '✋'
-//     },
-//     {
-//         id: 2,
-//         name: "scissor",
-//         emojiDec:'✌'
-//     }
-// ];
-
 export class rivals extends React.Component{
     constructor(props){
         super(props);
@@ -129,7 +109,6 @@ export class rivals extends React.Component{
                 <Form 
                     handleSubmit={this.handleSubmit}
                     value={this.value}
-                    // counter={this.state.counter}
                 />
                 <Dash
                     handleClick={this.handleClick}
