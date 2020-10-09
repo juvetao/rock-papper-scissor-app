@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import "./ComputerWin.css"
 
 const ComputerWin = (props) =>{
 
@@ -9,7 +10,7 @@ const ComputerWin = (props) =>{
             <button class="btn_restart" onClick = {props.restart}>Restart</button>
         </div>
         );
-}
+};
 
 export default ComputerWin;
 

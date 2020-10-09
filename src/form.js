@@ -2,7 +2,6 @@ import React from 'react';
 import "./form.css";
 
 const Form = (props) => {
-    if(props.counter === 0){
     return (
         <div>
         <h1>Game: Rock, Paper and Scissor</h1>
@@ -14,11 +13,7 @@ const Form = (props) => {
                     <input type="submit" value="Submit" />
                 </form>
         </div>
-    )}else {
-        return(
-            <div></div>
-        )
-    }
+    )
 }
 
 export default Form

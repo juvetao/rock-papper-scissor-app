@@ -1,29 +1,31 @@
 import React from 'react';
-import './game.css';
-import Dash from './dash'
-import Form from './form'
-import PlayerWin from './playerwin'
-import ComputerWin from './computerwin'
+import './Game.css';
+import Dash from './Dashboard'
+import Form from './Form'
+import PlayerWin from './PlayerWin'
+import ComputerWin from './ComputerWin'
+import Dashboard from './Dashboard';
+import Weapons from './Weapons'
 
 //An array stored weapons + en extra empty element (in order to initialize index in constructor state as 0)
-export const weapons = [
-    {},
-    {
-        id: 0,
-        name: "rock",
-        emojiDec: '✊'
-    },
-    {
-        id: 1,
-        name: "paper",
-        emojiDec: '✋'
-    },
-    {
-        id: 2,
-        name: "scissor",
-        emojiDec:'✌'
-    }
-];
+// export const weapons = [
+//     {},
+//     {
+//         id: 0,
+//         name: "rock",
+//         emojiDec: '✊'
+//     },
+//     {
+//         id: 1,
+//         name: "paper",
+//         emojiDec: '✋'
+//     },
+//     {
+//         id: 2,
+//         name: "scissor",
+//         emojiDec:'✌'
+//     }
+// ];
 
 export class rivals extends React.Component{
     constructor(props){
@@ -47,7 +49,7 @@ export class rivals extends React.Component{
     handleClick = (event) => {
         //player part
         let playerChoice = event.target.id;
-        let tempIndex = weapons.findIndex( weapon => { 
+        let tempIndex = Weapons.findIndex( weapon => { 
             return weapon.name === event.target.id}
         );
         // console.log(tempIndex);
@@ -59,7 +61,7 @@ export class rivals extends React.Component{
         );
 
         //computer part
-        let computerChoice = weapons[Math.floor(Math.random()*3)+1]; // get a random element between index 1 - 3
+        let computerChoice = Weapons[Math.floor(Math.random()*3)+1]; // get a random element between index 1 - 3
         this.setState(
             {
                 computerSelected: computerChoice,
@@ -126,8 +128,8 @@ export class rivals extends React.Component{
             <div>
                 <Form 
                     handleSubmit={this.handleSubmit}
-                    value={this.state.roundResult}
-                    counter={this.state.counter}
+                    value={this.value}
+                    // counter={this.state.counter}
                 />
                 <Dash
                     handleClick={this.handleClick}
@@ -154,9 +156,16 @@ export class rivals extends React.Component{
                     computerScore={this.state.computerScore}
                     restart={this.restart}/>
                 )
-            
-            }else return(
-                <Dash
+            }else if(this.state.computerScore > this.state.totalRounds/2){
+                return (
+                    <ComputerWin
+                        playerScore={this.state.playerScore}
+                        computerScore={this.state.computerScore}
+                        restart={this.restart}/>
+                    );
+            }
+            else return(
+                <Dashboard
                     handleClick={this.handleClick}
                     counter={this.state.counter}
                     totalRounds={this.state.totalRounds}
@@ -185,7 +194,7 @@ export class rivals extends React.Component{
                     restart={this.restart}/>
                 );
         }else return(
-            <Dash
+            <Dashboard
                     handleClick={this.handleClick}
                     counter={this.state.counter}
                     totalRounds={this.state.totalRounds}

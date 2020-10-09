@@ -1,0 +1,24 @@
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+
+.btn_weapon{
+    display: inline;
+    margin: auto 15px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 25px;
+    background: #000;
+}
+
+.result{
+    background-color: lemonchiffon;
+    padding: 10px 5px;
+}
+
+.weapons{
+    padding: 20px 450px;
+}
