@@ -1,8 +1,12 @@
 import React from 'react';
 import './game.css';
+import Dash from './dash'
+import Form from './form'
+import PlayerWin from './playerwin'
+import ComputerWin from './computerwin'
 
 //An array stored weapons + en extra empty element (in order to initialize index in constructor state as 0)
-const weapons = [
+export const weapons = [
     {},
     {
         id: 0,
@@ -120,112 +124,77 @@ export class rivals extends React.Component{
         if(this.state.counter === 0){
         return(
             <div>
-                <h1>Game: Rock, Paper and Scissor</h1>
-                <form class="set_form"onSubmit={this.handleSubmit}>
-                    <label>
-                        Enter the total round:
-                    <input type="text" name = "totalInput" value={this.state.value} defaultValue="5"/>
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
-            <div class="weapons">
-                <button class="btn_weapon" onClick = {this.handleClick} id = "rock" >
-                    Rock
-                </button>
-                <button class="btn_weapon" onClick = {this.handleClick} id = "paper" >
-                    Paper
-                </button>
-                <button class="btn_weapon" onClick = {this.handleClick} id = "scissor">
-                    Scissor
-                </button>
-            </div>
-                <div class="result">
-                    <p><b>Round:</b> {this.state.counter} out of {this.state.totalRounds}</p>
-                    <p><b>The weapon Player selected:</b> {weapons[this.state.index].emojiDec}</p> 
-                    <p><b>The weapon Computer selected:</b> {this.state.computerSelected.emojiDec}</p>
-                    <p><b>Result of this round:</b> {this.state.roundResult}</p>
-                    <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
-                </div>
-            </div>
+                <Form 
+                    handleSubmit={this.handleSubmit}
+                    value={this.state.roundResult}
+                    counter={this.state.counter}
+                />
+                <Dash
+                    handleClick={this.handleClick}
+                    counter={this.state.counter}
+                    totalRounds={this.state.totalRounds}
+                    index={this.state.index}
+                    computerSelected={this.state.computerSelected}
+                    roundResult={this.state.roundResult}
+                    playerScore={this.state.playerScore}
+                    computerScore={this.state.computerScore}
+                />
+        </div>
+            
         )
         
     } else if (this.state.counter > 0){
         // To reach the game point for odd number of rounds
         if(this.state.totalRounds%2 === 1){
             if(this.state.playerScore >= Math.ceil(this.state.totalRounds/2)){
-                return (
-                    <div class="result">
-                        <h1>Player Win The Game! <span role="img" aria-label="smiling-eyes">😊</span></h1>
-                        <p><b>Player : Computer </b>{this.state.playerScore} : {this.state.computerScore}</p>
-                        <button class="btn_restart" onClick = {this.restart}>Restart</button>
-                    </div>
-                );
-            } else if(this.state.computerScore >= Math.ceil(this.state.totalRounds/2)){
-                return (
-                    <div class="result">
-                        <h1>Computer Win The Game! <span role="img" aria-label="cold-sweat">😓 </span></h1>
-                        <p><b>Player : Computer </b>{this.state.playerScore} : {this.state.computerScore}</p>
-                        <button class="btn_restart" onClick = {this.restart}>Restart</button>
-                    </div>
-                    );
+                return(
+                <PlayerWin 
+                    playerScore={this.state.playerScore}
+                    totalRounds={this.state.totalRounds}
+                    computerScore={this.state.computerScore}
+                    restart={this.restart}/>
+                )
+            
             }else return(
-                <div>
-                    <button class="btn_weapon" onClick = {this.handleClick} id = "rock" >
-                        Rock
-                    </button>
-                    <button class="btn_weapon" onClick = {this.handleClick} id = "paper" >
-                        Paper
-                    </button>
-                    <button class="btn_weapon" onClick = {this.handleClick} id = "scissor">
-                        Scissor
-                    </button>
-                    <div class="result">
-                        <p><b>Round:</b> {this.state.counter} out of {this.state.totalRounds}</p>
-                        <p><b>The weapon Player selected:</b> {weapons[this.state.index].emojiDec}</p> 
-                        <p><b>The weapon Computer selected:</b> {this.state.computerSelected.emojiDec}</p>
-                        <p><b>Result of this round:</b> {this.state.roundResult}</p>
-                        <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
-                    </div>
-                </div>
+                <Dash
+                    handleClick={this.handleClick}
+                    counter={this.state.counter}
+                    totalRounds={this.state.totalRounds}
+                    index={this.state.index}
+                    computerSelected={this.state.computerSelected}
+                    roundResult={this.state.roundResult}
+                    playerScore={this.state.playerScore}
+                    computerScore={this.state.computerScore}
+                />
                 );
     }
     // To reach the game point for even number of rounds 
     else if(this.state.totalRounds%2 === 0){
         if(this.state.playerScore > this.state.totalRounds/2){
             return (
-                <div class="result">
-                    <h1>Player Win The Game! <span role="img" aria-label="smiling-eyes">😊</span></h1>
-                    <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
-                    <button class="btn_restart" onClick = {this.restart}>Restart</button>
-                </div>
+                <PlayerWin
+                    playerScore={this.state.playerScore}
+                    computerScore={this.state.computerScore}
+                    restart={this.restart}/>
                 );
         }else if(this.state.computerScore > this.state.totalRounds/2){
             return (
-                <div class="result">
-                    <h1>Computer Win The Game! <span role="img" aria-label="cold-sweat">😓 </span></h1>
-                    <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
-                    <button class="btn_restart" onClick = {this.restart}>Restart</button>
-                </div>
+                <ComputerWin
+                    playerScore={this.state.playerScore}
+                    computerScore={this.state.computerScore}
+                    restart={this.restart}/>
                 );
         }else return(
-            <div>
-            <button class="btn_weapon" onClick = {this.handleClick} id = "rock" >
-                Rock
-            </button>
-            <button class="btn_weapon" onClick = {this.handleClick} id = "paper" >
-                Paper
-            </button>
-            <button class="btn_weapon" onClick = {this.handleClick} id = "scissor">
-                Scissor
-            </button>
-                <div class="result">
-                    <p><b>Round:</b> {this.state.counter} out of {this.state.totalRounds}</p>
-                    <p><b>The weapon Player selected:</b> {weapons[this.state.index].emojiDec}</p> 
-                    <p><b>The weapon Computer selected:</b> {this.state.computerSelected.emojiDec}</p>
-                    <p><b>Result of this round:</b> {this.state.roundResult}</p>
-                    <p><b>Player : Computer </b> {this.state.playerScore} : {this.state.computerScore}</p>
-                </div>
-            </div>
+            <Dash
+                    handleClick={this.handleClick}
+                    counter={this.state.counter}
+                    totalRounds={this.state.totalRounds}
+                    index={this.state.index}
+                    computerSelected={this.state.computerSelected}
+                    roundResult={this.state.roundResult}
+                    playerScore={this.state.playerScore}
+                    computerScore={this.state.computerScore}
+                />
             );
         }
     } 
